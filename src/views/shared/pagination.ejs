@@ -1,0 +1,30 @@
+  <div class="clearfix">
+    <div class="hint-text">showing <b><%= model.length %></b> out of <b><%= rowsLength %></b></div>
+    <ul class="pagination">
+      <% if (rowsLength) { %>
+
+      <% if (pnum != 1) { %>
+      <li class="page-item ">
+        <a href="/<%= Route %>/<%= (pnum - 1) %>" class=" page-link">Previous</a>
+      </li>
+      <% } %>
+
+      <% for( let i = 1; i <= Math.ceil(rowsLength / 5); i++ ) { %>
+      <% if (i == pnum) { %>
+      <li class="page-item active">
+        <a href="/<%= Route %>/<%= i %>" class="page-link"><%= i %></a>
+      </li>
+      <% } else{%>
+      <li class="page-item">
+        <a href="/<%= Route %>/<%= i %>" class="page-link"><%= i %></a>
+      </li>
+      <% } %>
+      <% } %>
+      <% if (pnum != Math.ceil(rowsLength / 5)) { %>
+      <li class="page-item ">
+        <a href="/<%= Route %>/<%= (pnum + 1) %>" class="page-link">Next</a>
+      </li>
+      <% } %>
+      <% } %>
+    </ul>
+  </div>

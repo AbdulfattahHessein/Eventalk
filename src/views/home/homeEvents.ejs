@@ -1,0 +1,105 @@
+<% 
+  Title = "Events";
+  let active = "";
+%>
+<section class="ftco-section bg-light" id="event-schedule">
+  <div class="container">
+    <div class="row justify-content-center mb-5 pb-3">
+      <div class="col-md-7 text-center heading-section ftco-animate">
+        <span class="subheading">Schedule</span>
+        <h2 class="mb-4"><span>Events</span> Schedule</h2>
+      </div>
+    </div>
+    <!--  ************ classs content  days ****** -->
+    <div class="ftco-search">
+      <div class="row">
+        <div class="col-md-12 nav-link-wrap">
+          <div class="nav nav-pills d-flex text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
+            <% for( let i = 0; i < (events.length > 4? 4 : events.length); i++ ) { %>
+            <% if (i == 0) { 
+            active = "active";
+            } else { 
+            active = "";
+            } %>
+            <a class="nav-link ftco-animate <%= active %>" id="v-pills-<%= i  + 1 %>-tab" data-toggle="pill" href="#v-pills-<%= i  + 1 %>" role="tab" aria-controls="v-pills-<%= i  + 1 %>" aria-selected="true"><%= events[i].date.toLocaleDateString('en-US',{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })  %></span></a>
+            <% } %>
+
+          </div>
+        </div>
+        <div class="col-md-12 tab-wrap">
+
+          <div class="tab-content" id="v-pills-tabContent">
+            <% for( let i = 0; i < (events.length > 4? 4 : events.length); i++ ) { %>
+            <% if (i == 0) { 
+            active = "active";
+            } else { 
+            active = "";
+            } %>
+            <div class="tab-pane fade show <%= active %>" id="v-pills-<%= i  + 1 %>" role="tabpanel" aria-labelledby="day-<%= i %>-tab">
+              <div class="speaker-wrap ftco-animate d-flex">
+                <div class="img speaker-img" style="background-image: url(images/person_1.jpg);"></div>
+                <div class="text pl-md-5">
+                  <span class="time"><%= events[i].date.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'}) %></span>
+                  <h2><a href="#"> <%= events[i].title %></a> </h2>
+                  <p class=""> <%= events[i].description %> </p>
+                  <h3 class="speaker-name">&mdash; <a href="#"><%= events[i].speakerName %></a> <span class="position"><%= events[i].speakerJob %></span></h3>
+                </div>
+              </div>
+            </div>
+            <% } %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section bg-light">
+  <div class="container">
+    <div class="row justify-content-center mb-5 pb-3">
+      <div class="col-md-7 text-center heading-section ftco-animate">
+        <h2 class="mb-4"> All Events</h2>
+      </div>
+    </div>
+    <div class="row d-flex">
+      <% for(let i=0 ; i<events.length ; i++) {  %>
+      <div class="col-md-4 d-flex ftco-animate">
+        <div class="blog-entry justify-content-end" style="width: 400px;  border-radius:5px">
+          <a href="blog-single.html" class="block-20" style="background-image: url('images/image_<%=i+1%>.jpg');">
+          </a>
+          <div class="text p-4 float-right d-block">
+            <div class="d-flex align-items-center pt-2 mb-4">
+              <div class="one">
+                <span class="day"><%= events[i].date.getDay() %></span>
+              </div>
+              <div class="two">
+                <span class="yr"><%= events[i].date.getFullYear() %></span>
+                <span class="mos"><%= events[i].date.toLocaleString('default', { month: 'long' }) %></span>
+              </div>
+            </div>
+            <h3 class="heading mt-2"><a href="#"><%= events[i].title  %></a></h3>
+            <p><%=events[i].description%></p>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+    <div class="row mt-5">
+      <div class="col text-center">
+        <div class="block-27">
+          <ul>
+            <li><a href="#">&lt;</a></li>
+            <li class="active"><span>1</span></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&gt;</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
