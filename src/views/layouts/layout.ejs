@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
 
   <link rel="stylesheet" href="/css/open-iconic-bootstrap.min.css">
   <link rel="stylesheet" href="/css/animate.css">
@@ -42,13 +43,22 @@
           <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
           <li class="nav-item"><a href="home-events" class="nav-link">Events</a></li>
           <li class="nav-item"><a href="home-speakers" class="nav-link">Speakers</a></li>
+
+          <% if (Title == "Home") { %>
           <li class="nav-item"><a href="#contact-us" class="nav-link">Contact</a></li>
           <li class="nav-item"><a href="#about-us" class="nav-link">About</a></li>
-          <!-- <li class="nav-item cta mr-md-2 text-success"><a href="/user/login" class="nav-link">Login</a></li>
-          <li class="nav-item cta mr-md-2"><a href="/user/signup" class="nav-link">Sign Up</a></li> -->
-          <li class="nav-item cta mr-md-2"><a href="/user/signup" class="nav-link">Register</a></li>
+          <% } %>
 
+          <% if (!user) { %>
+          <li class="nav-item cta mr-md-2"><a href="/user/signup" class="nav-link">Register</a></li>
+          <li class="nav-item cta mr-md-2 text-success"><a href="/user/login" class="nav-link">Login</a></li>
+          <% } %>
+          <% if ( user && user.role === 'admin') { %>
           <li class="nav-item cta mr-md-2"><a href="/event" class="nav-link">Admin</a></li>
+          <% } %>
+          <% if (user) { %>
+          <li class="nav-item cta mr-md-2 text-success"><a href="/user/logout" class="nav-link">Logout</a></li>
+          <% } %>
         </ul>
       </div>
     </div>
@@ -87,8 +97,10 @@
             <h2 class="ftco-heading-2">Privacy</h2>
             <ul class="list-unstyled">
               <li><a href="#" class="py-2 d-block">Career</a></li>
+              <% if (Title == "Home") { %>
               <li><a href="#about-us" class="py-2 d-block">About Us</a></li>
               <li><a href="#contact-us" class="py-2 d-block">Contact Us</a></li>
+              <% } %>
               <li><a href="#" class="py-2 d-block">Services</a></li>
             </ul>
           </div>
@@ -143,7 +155,7 @@
   <script src="/js/bootstrap-datepicker.js"></script>
   <script src="/js/jquery.timepicker.min.js"></script>
   <script src="/js/scrollax.min.js"></script>
-  <script src="/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="/js/google-map.js"></script>
   <script src="/js/main.js"></script>
   <%- script %>
@@ -151,6 +163,3 @@
 </body>
 
 </html>
-<script>
-
-</script>
