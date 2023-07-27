@@ -1,5 +1,6 @@
 const db = require("../models");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 module.exports = {
   renderSignup: async (req, res) => {
@@ -15,7 +16,8 @@ module.exports = {
   login: async (req, res) => {
     const user = await db.users.findOne({ where: { email: req.body.email } });
     if (user != null) {
-      if (user.password === req.body.password) {
+      let isValid = await bcrypt.compare(req.body.password, user.password);
+      if (isValid) {
         const token = jwt.sign(
           { userId: user.id, role: user.role, firstName: user.firstName },
           process.env.JWT_SECRET_KEY,
