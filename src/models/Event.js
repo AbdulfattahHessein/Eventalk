@@ -1,7 +1,7 @@
 const { DataTypes } = require( "sequelize" );
 const sequelize = require( "./sequelize" );
 
-const Event = sequelize.define( 'Event', {
+const Event = sequelize.define( 'event', {
     title: {
         type: DataTypes.STRING( 50 ),
         allowNull: false,

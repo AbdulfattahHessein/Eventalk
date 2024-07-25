@@ -8,6 +8,11 @@ module.exports = {
       .query(`SELECT e.*, concat(s.firstName,' ', s.lastName) as speakerName, s.job as speakerJob, t.name as topicName 
             FROM events e join speakers s on s.id = e.speakerId
                           join topics t on e.topicId = t.id where date <= now() order by date limit 0, 5`);
+    if (eventsSchedule)
+      [eventsSchedule] = await db.sequelize
+        .query(`SELECT e.*, concat(s.firstName,' ', s.lastName) as speakerName, s.job as speakerJob, t.name as topicName
+            FROM events e join speakers s on s.id = e.speakerId
+                          join topics t on e.topicId = t.id order by date limit 1`);
 
     let [speakers] = await db.sequelize.query(
       `select concat(s.firstName,' ', s.lastName)as name , s.job from speakers s `
