@@ -3,14 +3,12 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const multer = require("multer");
 const expressLayouts = require("express-ejs-layouts");
-let session = require("express-session");
+let session = require("cookie-session");
 var cookieParser = require("cookie-parser");
 const { checkUser, adminAuth } = require("./src/middlewares");
 const jwt = require("jsonwebtoken");
-
 const app = express();
 const port = 3000;
-const db = require("./src/models");
 const { topicRouter } = require("./src/routers");
 const { speakerRouter } = require("./src/routers");
 const { eventRouter } = require("./src/routers");
@@ -18,10 +16,8 @@ const { homeRouter } = require("./src/routers");
 const { userRouter } = require("./src/routers");
 
 let subdir = ["", "events", "speakers", "topics", "layouts", "home"];
-let views = [];
-for (let i = 0; i < subdir.length; i++) {
-  views.push(`${process.cwd()}/src/views/${subdir[i]}`);
-}
+let views = subdir.map((dir) => path.join(__dirname, "src", "views", dir));
+
 app.use(session({ resave: true, secret: "123456", saveUninitialized: true }));
 app.use(cookieParser());
 
