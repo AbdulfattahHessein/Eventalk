@@ -58,19 +58,6 @@ app.use("/topic", adminAuth, topicRouter);
 app.use("/speaker", adminAuth, speakerRouter);
 app.use("/event", adminAuth, eventRouter);
 
-// app.get( '/', ( req, res ) => {
-//     // res.sendFile( 'index.html', {
-//     //     root: path.join( __dirname, '/src/public' ),
-//     // } );
-//     res.sendFile( path.join( __dirname, '/src/public/index.html' ) );
-// } )
-
-// app.get( '/', ( req, res ) => {
-
-//     res.render( 'event-type' );
-//     req.url
-// } )
-
 app.all("*", (req, res) => {
   res.send("404 Page Note Found");
 });
